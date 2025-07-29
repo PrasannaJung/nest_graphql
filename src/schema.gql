@@ -2,27 +2,43 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type AuthResponse {
-  accessToken: String!
-  message: String!
-  refreshToken: String!
+input CreatePostInput {
+  content: String!
+  title: String!
 }
 
 input CreateUserInput {
   email: String!
   password: String!
+  username: String!
+}
+
+type LoginResponse {
+  accessToken: String!
+  refreshToken: String!
+}
+
+input LoginUserInput {
+  email: String!
+  password: String!
 }
 
 type Mutation {
-  signUp(input: CreateUserInput!): AuthResponse!
+  createPost(input: CreatePostInput!): PostEntity!
+  login(input: LoginUserInput!): LoginResponse!
+  register(input: CreateUserInput!): RegisteResponse!
 }
 
-type Post {
+type PostEntity {
   content: String
   id: ID!
   title: String!
 }
 
 type Query {
-  posts: [Post!]!
+  posts: [PostEntity!]!
+}
+
+type RegisteResponse {
+  message: String!
 }
